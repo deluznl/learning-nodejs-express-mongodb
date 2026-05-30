@@ -29,15 +29,23 @@ const server = http.createServer((req, res) => {
     // This will give me error
     // ERR_HTTP_HEADERS_SENT: Cannot write headers after they are sent to the client
     // An HTTP request is a one-shot deal: One Request = One Response.
-    res.writeHead(200, {
-        "contenast-type": "text/html",
-    })
+
+    // REMOVED the global res.writeHead from here!
+    // res.writeHead(200, {
+    //     "contenast-type": "text/html",
+    // })
+
+
+    
 
     if(method === "GET" && path === "/"){
+        res.writeHead(200, {"contenast-type": "text/html",}); // Moved it here
         res.end("Home is working");
     }else if(method == "GET" && path === "/about"){
+        res.writeHead(200, {"contenast-type": "text/html",}); // Moved it here
         res.end("This is about page");
     }else if (method == "GET" && path === "/contact"){
+        res.writeHead(200, {"contenast-type": "text/html",}); // Moved it here
         res.end("This is contact page");
     }else{
         // If there will be no else and someone types the path that does not exist it will go in loop.
